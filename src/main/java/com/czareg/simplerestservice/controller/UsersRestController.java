@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class UsersRestController {
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/users/{login}")
     public User getUser(@PathVariable("login") String login) {

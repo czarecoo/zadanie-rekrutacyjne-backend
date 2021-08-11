@@ -13,8 +13,13 @@ public class GithubUser {
     @NonNull
     String login;
     String name;
+    String type;
     @JsonProperty("avatar_url")
     String avatarUrl;
     @JsonProperty("created_at")
     String createdAt;
+    //I am trusting github to not return some garbage or null here
+    int followers;
+    @JsonProperty("public_repos")
+    int publicReposCount;
 }

@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This test class requires connection to github.
+ * <p>
+ * I am assuming czarecoo is special test account and its values will not change
  */
 @SpringBootTest
 class GithubClientTest {
@@ -41,6 +43,14 @@ class GithubClientTest {
     }
 
     @Test
+    void shouldReturnCorrectTypeForGithubUserUsingRealGithubClient() {
+        GithubUser githubUser = githubClient.getGithubUser(TEST_USER_LOGIN);
+
+        assertNotNull(githubUser);
+        assertEquals("User", githubUser.getType());
+    }
+
+    @Test
     void shouldReturnCorrectAvatarUrlForGithubUserUsingRealGithubClient() {
         GithubUser githubUser = githubClient.getGithubUser(TEST_USER_LOGIN);
 
@@ -54,5 +64,21 @@ class GithubClientTest {
 
         assertNotNull(githubUser);
         assertEquals("2017-11-21T10:00:54Z", githubUser.getCreatedAt());
+    }
+
+    @Test
+    void shouldReturnCorrectFollowersForGithubUserUsingRealGithubClient() {
+        GithubUser githubUser = githubClient.getGithubUser(TEST_USER_LOGIN);
+
+        assertNotNull(githubUser);
+        assertEquals(1, githubUser.getFollowers());
+    }
+
+    @Test
+    void shouldReturnCorrectPublicReposCountForGithubUserUsingRealGithubClient() {
+        GithubUser githubUser = githubClient.getGithubUser(TEST_USER_LOGIN);
+
+        assertNotNull(githubUser);
+        assertEquals(34, githubUser.getPublicReposCount());
     }
 }
