@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
 @ControllerAdvice
-class GlobalControllerExceptionHandler {
+class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public void handleException(Exception e) {
-        log.error("Unexpected exception caught", e);
+    @ExceptionHandler(IllegalArgumentException.class)
+    void handleIllegalArgumentException(IllegalArgumentException e) {
+        log.error("IllegalArgumentException exception caught", e);
     }
 }

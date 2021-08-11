@@ -1,7 +1,6 @@
-package com.czareg.simplerestservice.service;
+package com.czareg.simplerestservice.service.user;
 
 import com.czareg.simplerestservice.client.GithubUser;
-import com.czareg.simplerestservice.controller.User;
 import org.springframework.stereotype.Component;
 
 @Component

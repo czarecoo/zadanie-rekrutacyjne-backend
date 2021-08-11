@@ -1,4 +1,4 @@
-package com.czareg.simplerestservice.controller;
+package com.czareg.simplerestservice.service.user;
 
 import lombok.NonNull;
 import lombok.Value;

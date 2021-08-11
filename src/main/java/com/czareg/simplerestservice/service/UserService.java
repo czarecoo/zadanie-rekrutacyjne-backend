@@ -2,8 +2,9 @@ package com.czareg.simplerestservice.service;
 
 import com.czareg.simplerestservice.client.GithubClient;
 import com.czareg.simplerestservice.client.GithubUser;
-import com.czareg.simplerestservice.controller.User;
 import com.czareg.simplerestservice.service.calculator.Calculator;
+import com.czareg.simplerestservice.service.user.User;
+import com.czareg.simplerestservice.service.user.UserFactory;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
