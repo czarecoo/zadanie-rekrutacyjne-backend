@@ -5,6 +5,7 @@ import com.czareg.simplerestservice.client.GithubUser;
 import com.czareg.simplerestservice.repository.Request;
 import com.czareg.simplerestservice.repository.RequestRepository;
 import com.czareg.simplerestservice.service.user.User;
+import feign.FeignException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,5 +83,22 @@ class UserServiceTest {
 
         assertNotNull(user);
         assertEquals(35, user.getCalculations());
+    }
+
+    @Test
+    void shouldSaveRequestForLoginEvenWhenGithubCallFails() {
+        when(githubClient.getGithubUser(any())).thenThrow(FeignException.class);
+
+        try {
+            userService.processUser(TEST_USER_LOGIN);
+        } catch (FeignException e) {
+            //ignoring for test purposes
+        }
+
+        Optional<Request> optionalRequest = requestRepository.findById(TEST_USER_LOGIN);
+        assertTrue(optionalRequest.isPresent());
+        Request request = optionalRequest.get();
+        assertEquals(TEST_USER_LOGIN, request.getLogin());
+        assertEquals(1, request.getRequestCount());
     }
 }
