@@ -3,6 +3,7 @@ package com.czareg.simplerestservice.service;
 import com.czareg.simplerestservice.client.GithubClient;
 import com.czareg.simplerestservice.client.GithubUser;
 import com.czareg.simplerestservice.service.calculator.Calculator;
+import com.czareg.simplerestservice.service.db.RequestsPerLoginDbUpdater;
 import com.czareg.simplerestservice.service.user.User;
 import com.czareg.simplerestservice.service.user.UserFactory;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserService {
     private final GithubClient githubClient;
+    private final RequestsPerLoginDbUpdater requestsPerLoginDbUpdater;
     private final Calculator calculator;
     private final UserFactory userFactory;
 
@@ -21,6 +23,7 @@ public class UserService {
         log.info("received login {}", login);
         GithubUser githubUser = githubClient.getGithubUser(login);
         log.info("collected githubUser {}", githubUser);
+        requestsPerLoginDbUpdater.update(login);
         int followers = githubUser.getFollowers();
         int publicReposCount = githubUser.getPublicReposCount();
         int calculations = calculator.calculate(followers, publicReposCount);
