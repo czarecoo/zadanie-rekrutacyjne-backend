@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
 import java.util.function.Supplier;
 
 @Slf4j
@@ -15,8 +14,7 @@ import java.util.function.Supplier;
 public class RequestsPerLoginDbUpdater {
     private final RequestRepository requestRepository;
 
-    @Transactional
-    public void update(String login) {
+    public synchronized void update(String login) {
         Request request = requestRepository.findById(login)
                 .orElseGet(createRequest(login));
         long requestCount = request.getRequestCount();
@@ -27,6 +25,10 @@ public class RequestsPerLoginDbUpdater {
     }
 
     private Supplier<Request> createRequest(String login) {
-        return () -> new Request(login, 0);
+        return () -> {
+            Request request = new Request(login, 0);
+            log.info("Created new request: {}", request);
+            return request;
+        };
     }
 }
