@@ -26,7 +26,7 @@ public class UserService {
         log.info("Collected githubUser {}", githubUser);
         int followers = githubUser.getFollowers();
         int publicReposCount = githubUser.getPublicReposCount();
-        int calculations = calculator.calculate(followers, publicReposCount);
+        float calculations = calculator.calculate(followers, publicReposCount);
         log.info("Calculations {}", calculations);
         return userFactory.create(githubUser, calculations);
     }

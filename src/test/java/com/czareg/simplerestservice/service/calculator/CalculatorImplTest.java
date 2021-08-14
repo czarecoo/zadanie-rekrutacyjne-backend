@@ -16,7 +16,7 @@ class CalculatorImplTest {
 
     @Test
     void shouldReturnZeroWhenFollowersIsZero() {
-        int result = calculator.calculate(0, 5);
+        float result = calculator.calculate(0, 5);
 
         assertEquals(0, result);
     }
@@ -33,15 +33,22 @@ class CalculatorImplTest {
 
     @Test
     void shouldReturnCorrectlyCalculatedResultWhenPublicReposCountIsZero() {
-        int result = calculator.calculate(2, 0);
+        float result = calculator.calculate(2, 0);
 
         assertEquals(6, result);
     }
 
     @Test
-    void shouldReturnCorrectlyCalculatedResultWhenBothParametersArePositiveNumbers() {
-        int result = calculator.calculate(2, 2);
+    void shouldReturnCorrectlyCalculatedResultWhenBothParametersArePositiveNumbersAndResultIsDecimal() {
+        float result = calculator.calculate(3, 5);
 
-        assertEquals(12, result);
+        assertEquals(14, result);
+    }
+
+    @Test
+    void shouldReturnCorrectlyCalculatedResultWhenBothParametersArePositiveNumbersAndResultIsFloat() {
+        float result = calculator.calculate(7, 38);
+
+        assertEquals(34.28571319580078, result);
     }
 }

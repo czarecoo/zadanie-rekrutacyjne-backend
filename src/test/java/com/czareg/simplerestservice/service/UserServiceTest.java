@@ -82,7 +82,7 @@ class UserServiceTest {
         User user = userService.processUser(TEST_USER_LOGIN);
 
         assertNotNull(user);
-        assertEquals(35, user.getCalculations());
+        assertEquals(42, user.getCalculations());
     }
 
     @Test

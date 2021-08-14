@@ -13,5 +13,5 @@ public class User {
     String type;
     String avatarUrl;
     String createdAt;
-    int calculations;
+    float calculations;
 }

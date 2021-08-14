@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserFactory {
-    public User create(GithubUser githubUser, int calculations) {
+    public User create(GithubUser githubUser, float calculations) {
         return new User(
                 githubUser.getId(),
                 githubUser.getLogin(),

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CalculatorImpl implements Calculator {
     @Override
-    public int calculate(int followers, int publicReposCount) {
+    public float calculate(int followers, int publicReposCount) {
         if (followers < 0) {
             throw new IllegalArgumentException("Followers count should never be lower then zero");
         }
@@ -17,6 +17,6 @@ public class CalculatorImpl implements Calculator {
             //In real world I would ask API consumers or requester what do they expect in this case
             return 0;
         }
-        return 6 / followers * (2 + publicReposCount);
+        return (float) (6.0 / followers * (2.0 + publicReposCount));
     }
 }
